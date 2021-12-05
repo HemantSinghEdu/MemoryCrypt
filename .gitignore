@@ -1,0 +1,6 @@
+.NET/**/bin/
+.NET/**/obj/
+
+
+.vscode/launch.json
+.vscode/tasks.json
