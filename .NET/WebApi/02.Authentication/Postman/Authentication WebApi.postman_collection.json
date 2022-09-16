@@ -45,7 +45,7 @@
 			"response": []
 		},
 		{
-			"name": "token - auth",
+			"name": "auth - token",
 			"request": {
 				"method": "POST",
 				"header": [],
@@ -68,6 +68,35 @@
 					"path": [
 						"auth",
 						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth - Register new User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"xavier@abc.com\",\r\n    \"password\": \"xavier123\",\r\n    \"confirmPassword\": \"xavier123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/auth/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"auth",
+						"register"
 					]
 				}
 			},
