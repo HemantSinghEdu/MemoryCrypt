@@ -9,7 +9,7 @@ namespace _02.Authentication.Controllers;
 
     [ApiController]
     [Route("[controller]")]
-    public class TokenController : ControllerBase
+    public class AuthController : ControllerBase
     {
         public List<User> tempUserDb = new List<User>{
             new User{UserId="abc123",UserName="John", DisplayName="BilboBaggins", Email="john@abc.com", Password="john@123" },
@@ -18,12 +18,12 @@ namespace _02.Authentication.Controllers;
 
         public IConfiguration _configuration;
 
-        public TokenController(IConfiguration config)
+        public AuthController(IConfiguration config)
         {
             _configuration = config;
         }
 
-        [HttpPost]
+        [HttpPost("login")]
         public async Task<IActionResult> Post(User userCreds)
         {
             if (userCreds != null && userCreds.Email != null && userCreds.Password != null)

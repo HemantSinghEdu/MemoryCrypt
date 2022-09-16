@@ -59,14 +59,15 @@
 					}
 				},
 				"url": {
-					"raw": "https://localhost:7110/token",
+					"raw": "https://localhost:7110/auth/login",
 					"protocol": "https",
 					"host": [
 						"localhost"
 					],
 					"port": "7110",
 					"path": [
-						"token"
+						"auth",
+						"login"
 					]
 				}
 			},
