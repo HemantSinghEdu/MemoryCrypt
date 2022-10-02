@@ -14,7 +14,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI1NzRjY2YzMS1jY2JkLTRlN2MtOTIxYS0xYzA5MjZiZGVhMzciLCJpYXQiOiIxNS0wOS0yMDIyIDAyOjU2OjU1IiwiVXNlcklkIjoiYWJjMTIzIiwiRGlzcGxheU5hbWUiOiJCaWxib0JhZ2dpbnMiLCJVc2VyTmFtZSI6IkpvaG4iLCJFbWFpbCI6ImpvaG5AYWJjLmNvbSIsImV4cCI6MTY2MzIxMTIxNSwiaXNzIjoiTWVtb3J5Y3J5cHRBdXRoU2VydmVyIiwiYXVkIjoiUG9zdG1hbkNsaWVudCJ9.TW2kCAYrAHgHSdZniyX_ljLPSNgJ2XH2qc8o6r5t72A",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiJjNTY2NzQ4Mi0wOGE5LTRhMjctYTkyYi1hOGYyNWEzNzlhMzUiLCJpYXQiOiIwMi0xMC0yMDIyIDA0OjMxOjExIiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY0Njg1MTMxLCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.HcOYG8W3wenTmRoBik__3itafhjc4ZtdWANZm8Phnv4",
 							"type": "string"
 						}
 					]
@@ -45,13 +45,13 @@
 			"response": []
 		},
 		{
-			"name": "auth - token",
+			"name": "auth - login",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"john@abc.com\",\r\n    \"password\": \"john@123\"\r\n}",
+					"raw": "{\r\n    \"email\": \"xavier@abc.com\",\r\n    \"password\": \"pass@123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -74,13 +74,81 @@
 			"response": []
 		},
 		{
+			"name": "auth - refresh",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n   \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiJhNjNlNjMwYy0wOTM1LTRjOTktYjg3ZC1lYzJlZjYxYjY0NzMiLCJpYXQiOiIwMi0xMC0yMDIyIDA0OjM2OjA5IiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY0Njg1NDI5LCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.9Gw3qSexWKF9Y3I2q7lLQUFVZITgm98GQBnR81hposQ\",\r\n    \"refreshToken\": \"wCqiYIQWRmlgTV7X3W4Qp4lwhy/Z/VcZao2nCtOh52H5hMkLvpgYEA/4mJKmLbKJ/CrFAsTqmunPnw8PaoW1pQ==\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/auth/refresh",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"auth",
+						"refresh"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth - revoke",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiIwMDcyMjdmOS0xNDBhLTQ2NzAtYjA0Zi0yOWZmMmMyYmUyYWEiLCJpYXQiOiIwMi0xMC0yMDIyIDA0OjM3OjExIiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY0Njg1NDkxLCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.Zo7zJ89pAldYtG8ijR_S6Iv1dPlvF6mBxwDs-qFpZIE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"refreshToken\": \"va6cvRXTQaH0+fRA6cqgv50mQlGMPwJ8hcHQWvNYtO91sg4iWtHB+VsGbuYPCGvz+FqDy3mVa9XRYDd8H2niHg==\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/auth/revoke",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"auth",
+						"revoke"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "auth - Register new User",
 			"request": {
 				"method": "POST",
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"email\":\"xavier@abc.com\",\r\n    \"password\": \"xavier123\",\r\n    \"confirmPassword\": \"xavier123\"\r\n}",
+					"raw": "{\r\n    \"email\":\"xavier@abc.com\",\r\n    \"userName\": \"xavier\",\r\n    \"displayName\": \"Savvy\",\r\n    \"password\": \"pass@123\",\r\n    \"confirmPassword\": \"pass@123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -113,7 +181,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI5Njc4MDA5OC1hNjNlLTQ3NGQtYTc5YS02MzJiOGQyZDBkMzIiLCJpYXQiOiIxNS0wOS0yMDIyIDAzOjQ0OjA5IiwiVXNlcklkIjoiYWJjMTIzIiwiRGlzcGxheU5hbWUiOiJCaWxib0JhZ2dpbnMiLCJVc2VyTmFtZSI6IkpvaG4iLCJFbWFpbCI6ImpvaG5AYWJjLmNvbSIsImV4cCI6MTY2MzIxNDA0OSwiaXNzIjoiTWVtb3J5Y3J5cHRBdXRoU2VydmVyIiwiYXVkIjoiUG9zdG1hbkNsaWVudCJ9.gDh4feBjxpob35RT3oTZF2Tm6F6lRBR04MLaRReChQE",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiJmMmYyMGE2ZS0wMGExLTQ0OWItYmEzYS00NjEyYjE2NzU1YzciLCJpYXQiOiIwMi0xMC0yMDIyIDA0OjI2OjU5IiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY0Njg0ODc5LCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.pKe7tEj59AJ1CalqDSNwMXOOBcwZXZ_eLiCehTPL3zo",
 							"type": "string"
 						}
 					]
@@ -138,6 +206,47 @@
 					"port": "7110",
 					"path": [
 						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "WeatherForecast - GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiIzODY2OTM1Yy1mZGU2LTRmMDktYjcwMS0yM2UwY2JlNzQxMTAiLCJpYXQiOiIwMi0xMC0yMDIyIDAzOjUyOjQyIiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY0NjgyODIyLCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.vk97I_upfAuiPsyfIZbAGhx6PS_osT3gihI9rHUSots",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/WeatherForecast",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"WeatherForecast"
 					]
 				}
 			},
