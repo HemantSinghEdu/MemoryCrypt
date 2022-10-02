@@ -1,0 +1,258 @@
+{
+	"info": {
+		"_postman_id": "068eba85-9d9f-42fd-964f-ccd8c81201af",
+		"name": "Authentication WebApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "15035856"
+	},
+	"item": [
+		{
+			"name": "articles - POST",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI1NzRjY2YzMS1jY2JkLTRlN2MtOTIxYS0xYzA5MjZiZGVhMzciLCJpYXQiOiIxNS0wOS0yMDIyIDAyOjU2OjU1IiwiVXNlcklkIjoiYWJjMTIzIiwiRGlzcGxheU5hbWUiOiJCaWxib0JhZ2dpbnMiLCJVc2VyTmFtZSI6IkpvaG4iLCJFbWFpbCI6ImpvaG5AYWJjLmNvbSIsImV4cCI6MTY2MzIxMTIxNSwiaXNzIjoiTWVtb3J5Y3J5cHRBdXRoU2VydmVyIiwiYXVkIjoiUG9zdG1hbkNsaWVudCJ9.TW2kCAYrAHgHSdZniyX_ljLPSNgJ2XH2qc8o6r5t72A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Astronomers reveal first photograph of a black hole at the heart of our galaxy\",\r\n    \"author\": \"John Doe\",\r\n    \"content\": \"This is the first image of Sagittarius A*, the supermassive black hole at the centre of our galaxy. It’s the first direct visual evidence of the presence of this black hole. It was captured by the Event Horizon Telescope (EHT), an array that linked together eight existing radio observatories across the planet to form a single 'Earth-sized' virtual telescope\",\r\n    \"views\": 900,\r\n    \"upvotes\": 70\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/articles",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth - token",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"john@abc.com\",\r\n    \"password\": \"john@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/auth/login",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"auth",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth - Register new User",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"xavier@abc.com\",\r\n    \"password\": \"xavier123\",\r\n    \"confirmPassword\": \"xavier123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/auth/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI5Njc4MDA5OC1hNjNlLTQ3NGQtYTc5YS02MzJiOGQyZDBkMzIiLCJpYXQiOiIxNS0wOS0yMDIyIDAzOjQ0OjA5IiwiVXNlcklkIjoiYWJjMTIzIiwiRGlzcGxheU5hbWUiOiJCaWxib0JhZ2dpbnMiLCJVc2VyTmFtZSI6IkpvaG4iLCJFbWFpbCI6ImpvaG5AYWJjLmNvbSIsImV4cCI6MTY2MzIxNDA0OSwiaXNzIjoiTWVtb3J5Y3J5cHRBdXRoU2VydmVyIiwiYXVkIjoiUG9zdG1hbkNsaWVudCJ9.gDh4feBjxpob35RT3oTZF2Tm6F6lRBR04MLaRReChQE",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/articles",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - GET/Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI1NzRjY2YzMS1jY2JkLTRlN2MtOTIxYS0xYzA5MjZiZGVhMzciLCJpYXQiOiIxNS0wOS0yMDIyIDAyOjU2OjU1IiwiVXNlcklkIjoiYWJjMTIzIiwiRGlzcGxheU5hbWUiOiJCaWxib0JhZ2dpbnMiLCJVc2VyTmFtZSI6IkpvaG4iLCJFbWFpbCI6ImpvaG5AYWJjLmNvbSIsImV4cCI6MTY2MzIxMTIxNSwiaXNzIjoiTWVtb3J5Y3J5cHRBdXRoU2VydmVyIiwiYXVkIjoiUG9zdG1hbkNsaWVudCJ9.TW2kCAYrAHgHSdZniyX_ljLPSNgJ2XH2qc8o6r5t72A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/articles/9520a0e7-3c65-4554-a6e9-2c25b60752b0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"articles",
+						"9520a0e7-3c65-4554-a6e9-2c25b60752b0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - Update",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI1NzRjY2YzMS1jY2JkLTRlN2MtOTIxYS0xYzA5MjZiZGVhMzciLCJpYXQiOiIxNS0wOS0yMDIyIDAyOjU2OjU1IiwiVXNlcklkIjoiYWJjMTIzIiwiRGlzcGxheU5hbWUiOiJCaWxib0JhZ2dpbnMiLCJVc2VyTmFtZSI6IkpvaG4iLCJFbWFpbCI6ImpvaG5AYWJjLmNvbSIsImV4cCI6MTY2MzIxMTIxNSwiaXNzIjoiTWVtb3J5Y3J5cHRBdXRoU2VydmVyIiwiYXVkIjoiUG9zdG1hbkNsaWVudCJ9.TW2kCAYrAHgHSdZniyX_ljLPSNgJ2XH2qc8o6r5t72A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"9520a0e7-3c65-4554-a6e9-2c25b60752b0\",\r\n    \"title\":\"Astronomers reveal first photograph of a black hole at the heart of our galaxy\",\r\n    \"author\": \"John Doe\",\r\n    \"content\": \"This is the first image of Sagittarius A*, the supermassive black hole at the centre of our galaxy. It’s the first direct visual evidence of the presence of this black hole. It was captured by the Event Horizon Telescope (EHT), an array that linked together eight existing radio observatories across the planet to form a single 'Earth-sized' virtual telescope\",\r\n    \"views\": 1200,\r\n    \"upvotes\": 70\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/articles/9520a0e7-3c65-4554-a6e9-2c25b60752b0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"articles",
+						"9520a0e7-3c65-4554-a6e9-2c25b60752b0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - Delete",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI1NzRjY2YzMS1jY2JkLTRlN2MtOTIxYS0xYzA5MjZiZGVhMzciLCJpYXQiOiIxNS0wOS0yMDIyIDAyOjU2OjU1IiwiVXNlcklkIjoiYWJjMTIzIiwiRGlzcGxheU5hbWUiOiJCaWxib0JhZ2dpbnMiLCJVc2VyTmFtZSI6IkpvaG4iLCJFbWFpbCI6ImpvaG5AYWJjLmNvbSIsImV4cCI6MTY2MzIxMTIxNSwiaXNzIjoiTWVtb3J5Y3J5cHRBdXRoU2VydmVyIiwiYXVkIjoiUG9zdG1hbkNsaWVudCJ9.TW2kCAYrAHgHSdZniyX_ljLPSNgJ2XH2qc8o6r5t72A",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7110/articles/9520a0e7-3c65-4554-a6e9-2c25b60752b0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"articles",
+						"9520a0e7-3c65-4554-a6e9-2c25b60752b0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
