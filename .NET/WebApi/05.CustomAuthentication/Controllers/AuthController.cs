@@ -2,6 +2,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using CustomAuthentication.Handlers;
 using CustomAuthentication.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -34,7 +35,7 @@ public class AuthController : ControllerBase
 
         var user = await _userManager.FindByEmailAsync(request.Email);
         var isAuthorized = user != null && await _userManager.CheckPasswordAsync(user, request.Password);
-        
+
         if (isAuthorized)
         {
             var authResponse = await GetTokens(user);
@@ -49,7 +50,7 @@ public class AuthController : ControllerBase
 
     }
 
-  
+
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh(RefreshRequest request)
     {
@@ -59,12 +60,13 @@ public class AuthController : ControllerBase
         }
 
         //fetch email from expired token string
-        var principal = GetPrincipalFromExpiredToken(request.AccessToken);
+        var customTokenHandler = new CustomSecurityTokenHandler();
+        var principal = customTokenHandler.GetPrincipalFromToken(request.AccessToken, _configuration);
         var userEmail = principal.FindFirstValue("Email"); //fetch the email claim's value
-        
+
         //check if any user with email id has matching refresh token
         var user = !string.IsNullOrEmpty(userEmail) ? await _userManager.FindByEmailAsync(userEmail) : null;
-        if(user==null || user.RefreshToken != request.RefreshToken)
+        if (user == null || user.RefreshToken != request.RefreshToken)
         {
             return BadRequest("Invalid refresh token");
         }
@@ -85,12 +87,12 @@ public class AuthController : ControllerBase
             return BadRequestErrorMessages();
         }
 
-         //fetch email from claims of currently logged in user
-        var userEmail = this.HttpContext.User.FindFirstValue("Email");  
+        //fetch email from claims of currently logged in user
+        var userEmail = this.HttpContext.User.FindFirstValue("Email");
 
         //check if any user with email id has matching refresh token
         var user = !string.IsNullOrEmpty(userEmail) ? await _userManager.FindByEmailAsync(userEmail) : null;
-        if( user == null || user.RefreshToken != request.RefreshToken)
+        if (user == null || user.RefreshToken != request.RefreshToken)
         {
             return BadRequest("Invalid refresh token");
         }
@@ -130,61 +132,14 @@ public class AuthController : ControllerBase
 
     }
 
-    private string GetRefreshToken()
-    {
-        var token = Convert.ToBase64String(RandomNumberGenerator.GetBytes(64));
-        //ensure token is unique by checking against db
-        var tokenIsUnique = !_userManager.Users.Any(u => u.RefreshToken == token);
-
-        if (!tokenIsUnique)
-            return GetRefreshToken();  //recursive call
-            
-        return token;
-    }
-
-    public ClaimsPrincipal GetPrincipalFromExpiredToken(string token)
-    {
-        var tokenValidationParameters = new TokenValidationParameters
-        {
-            ValidateAudience = false, //you might want to validate the audience and issuer depending on your use case
-            ValidateIssuer = false,
-            ValidateIssuerSigningKey = true,
-            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["token:key"])),
-            ValidateLifetime = false //here we are saying that we don't care about the token's expiration date
-        };
-        var tokenHandler = new JwtSecurityTokenHandler();
-        var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
-        var jwtSecurityToken = securityToken as JwtSecurityToken;
-        if (jwtSecurityToken == null || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
-            throw new SecurityTokenException("Invalid token");
-        return principal;
-    }
-
     private async Task<AuthResponse> GetTokens(User user)
     {
-            //create claims details based on the user information
-            var claims = new[] {
-                        new Claim(JwtRegisteredClaimNames.Sub, _configuration["token:subject"]),
-                        new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
-                        new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
-                        new Claim("UserId", user.Id),
-                        new Claim("UserName", user.UserName),
-                        new Claim("Email", user.Email)
-                    };
-
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["token:key"]));
-            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(
-                _configuration["token:issuer"],
-                _configuration["token:audience"],
-                claims,
-                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["token:accessTokenExpiryMinutes"])),
-                signingCredentials: signIn);
-            var tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
-
-            var refreshTokenStr = GetRefreshToken();
-            var authResponse = new AuthResponse { AccessToken = tokenStr, RefreshToken = refreshTokenStr };
-            return await Task.FromResult(authResponse);
+        var customTokenHandler = new CustomSecurityTokenHandler();
+        var accessToken = customTokenHandler.GetAccessToken(user, _configuration);
+        var tokenStr = customTokenHandler.GetEncryptedString(accessToken, _configuration["token:key"]);
+        var refreshTokenStr = customTokenHandler.GetRefreshToken(_userManager);
+        var authResponse = new AuthResponse { AccessToken = tokenStr, RefreshToken = refreshTokenStr };
+        return await Task.FromResult(authResponse);
     }
 
     private IActionResult BadRequestErrorMessages()
