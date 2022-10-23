@@ -4,7 +4,9 @@ namespace MvcClient.Services;
 
 public interface IApiCallerService
 {
-    Task<RegisterResponse> RegisterUser(RegisterRequest request);
-    Task<LoginResponse> Login(LoginRequest request);
+    Task<RegisterResponse> RequestRegisterAsync(RegisterRequest request);
+    Task<LoginResponse> RequestLoginAsync(LoginRequest request);
+    Task<LoginResponse> RequestRefreshAsync();
+    Task<ArticlesResponse> RequestArticlesAsync();
     
 }

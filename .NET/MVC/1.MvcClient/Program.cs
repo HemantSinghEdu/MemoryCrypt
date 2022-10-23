@@ -1,12 +1,22 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using MvcClient.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddTransient<IApiCallerService, ApiCallerService>();
+builder.Services.AddTransient<IAuthService, AuthService>();
 builder.Services.AddSingleton<HttpClient>();
 
 builder.Services.AddControllersWithViews();
+
+//add DI for IHttpContextAccessor to access HttpContext object
+builder.Services.AddHttpContextAccessor();
+
+builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+                .AddCookie(options => {
+                    options.LoginPath = "/auth/login";
+                });
 
 var app = builder.Build();
 
@@ -23,10 +33,11 @@ app.UseStaticFiles();
 
 app.UseRouting();
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
+    pattern: "{controller=Articles}/{action=Index}/{id?}");
 
 app.Run();
