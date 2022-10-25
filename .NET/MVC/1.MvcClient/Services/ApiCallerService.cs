@@ -51,14 +51,18 @@ public class ApiCallerService : IApiCallerService
             url: url,
             bodyContent: request);
         LoginResponse loginResponse = new LoginResponse();
+        
+        //if login was successful
         if (httpResponse.StatusCode == HttpStatusCode.OK)
         {
+            //map the login response
             loginResponse = await httpResponse.Content.ReadFromJsonAsync<LoginResponse>();
             loginResponse.Status = httpResponse.StatusCode;
             loginResponse.Email = request.Email;
         }
         else
         {
+            //else if login failed, map the error message
             var errMessage = await httpResponse.Content.ReadAsStringAsync();
             loginResponse.Status = httpResponse.StatusCode;
             loginResponse.Message = errMessage;
