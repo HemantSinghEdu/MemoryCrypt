@@ -97,16 +97,10 @@ public class AuthController : Controller
     public async Task<IActionResult> Logout()
     {
         //log the user out
-        LogoutUser();
+        await _authService.LogoutAsync();
 
-        //show logout page
-        return View();
-    }
-
-
-    private void LogoutUser()
-    {
-        //log the user out
+        //take to home page
+        return RedirectTo();
     }
 
     private IActionResult RedirectTo(string returnUrl = null)

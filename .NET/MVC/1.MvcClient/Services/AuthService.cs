@@ -24,4 +24,8 @@ public class AuthService : IAuthService
         await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
     }
 
+    public async Task LogoutAsync()
+    {
+        await _contextAccessor.HttpContext.SignOutAsync();
+    }
 }

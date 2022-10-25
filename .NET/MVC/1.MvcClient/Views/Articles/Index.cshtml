@@ -2,5 +2,14 @@
 
 <h4>Please click on one of the options below</h4>
 
-<a class="btn btn-primary" asp-controller="articles" asp-action="getArticles">View All Articles</a>
-<a class="btn btn-success" asp-controller="articles" asp-action="createArticle">Create New Article</a>
+@if(User.Identity.IsAuthenticated)
+{
+    <a class="btn btn-primary" asp-controller="articles" asp-action="getArticles">View All Articles</a>
+    <a class="btn btn-success" asp-controller="articles" asp-action="createArticle">Create New Article</a>
+    <a class="btn btn-danger" asp-controller="auth" asp-action="logout">Logout</a>
+}
+else
+{
+    <a class="btn btn-primary" asp-controller="auth" asp-action="register">Register</a>
+    <a class="btn btn-success" asp-controller="auth" asp-action="login">Login</a>
+}
