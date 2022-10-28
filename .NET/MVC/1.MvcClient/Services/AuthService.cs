@@ -21,6 +21,7 @@ public class AuthService : IAuthService
         identity.AddClaim(new Claim("refresh", refreshToken));
 
         var principal = new ClaimsPrincipal(identity);
+        //create a cookie with above claims
         await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
     }
 
