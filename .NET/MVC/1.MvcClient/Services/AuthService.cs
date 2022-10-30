@@ -14,13 +14,14 @@ public class AuthService : IAuthService
     }
     public async Task LoginAsync(string email, string accessToken, string refreshToken)
     {
-        //Instruct the browser to store the claims in a cookie 
+        //generate claims for email, access token, and refresh token
         var identity = new ClaimsIdentity(CookieAuthenticationDefaults.AuthenticationScheme);
         identity.AddClaim(new Claim(ClaimTypes.Email, email));
         identity.AddClaim(new Claim("token", accessToken));
         identity.AddClaim(new Claim("refresh", refreshToken));
 
         var principal = new ClaimsPrincipal(identity);
+        
         //create a cookie with above claims
         await _contextAccessor.HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal);
     }
