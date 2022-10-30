@@ -1,9 +1,11 @@
+@using System.Security.Claims
 <h1>Articles Homepage</h1>
 
 <h4>Please click on one of the options below</h4>
 
 @if(User.Identity.IsAuthenticated)
 {
+    <p>Hello @(User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email).Value)</p>
     <a class="btn btn-primary" asp-controller="articles" asp-action="getArticles">View All Articles</a>
     <a class="btn btn-success" asp-controller="articles" asp-action="createArticle">Create New Article</a>
     <a class="btn btn-danger" asp-controller="auth" asp-action="logout">Logout</a>

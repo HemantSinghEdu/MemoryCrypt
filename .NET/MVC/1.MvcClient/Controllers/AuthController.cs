@@ -90,6 +90,7 @@ public class AuthController : Controller
         }
         else
         {
+            //if refresh request failed, redirect to login page
             return RedirectToAction("login");
         }
     }
