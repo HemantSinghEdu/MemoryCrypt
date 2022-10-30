@@ -34,7 +34,7 @@ public class AuthController : ControllerBase
 
         var user = await _userManager.FindByEmailAsync(request.Email);
         var isAuthorized = user != null && await _userManager.CheckPasswordAsync(user, request.Password);
-        
+
         if (isAuthorized)
         {
             var authResponse = await GetTokens(user);
@@ -49,7 +49,7 @@ public class AuthController : ControllerBase
 
     }
 
-  
+
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh(RefreshRequest request)
     {
@@ -61,10 +61,10 @@ public class AuthController : ControllerBase
         //fetch email from expired token string
         var principal = GetPrincipalFromExpiredToken(request.AccessToken);
         var userEmail = principal.FindFirstValue("Email"); //fetch the email claim's value
-        
+
         //check if any user with email id has matching refresh token
         var user = !string.IsNullOrEmpty(userEmail) ? await _userManager.FindByEmailAsync(userEmail) : null;
-        if(user==null || user.RefreshToken != request.RefreshToken)
+        if (user == null || user.RefreshToken != request.RefreshToken)
         {
             return BadRequest("Invalid refresh token");
         }
@@ -85,12 +85,12 @@ public class AuthController : ControllerBase
             return BadRequestErrorMessages();
         }
 
-         //fetch email from claims of currently logged in user
-        var userEmail = this.HttpContext.User.FindFirstValue("Email");  
+        //fetch email from claims of currently logged in user
+        var userEmail = this.HttpContext.User.FindFirstValue("Email");
 
         //check if any user with email id has matching refresh token
         var user = !string.IsNullOrEmpty(userEmail) ? await _userManager.FindByEmailAsync(userEmail) : null;
-        if( user == null || user.RefreshToken != request.RefreshToken)
+        if (user == null || user.RefreshToken != request.RefreshToken)
         {
             return BadRequest("Invalid refresh token");
         }
@@ -111,10 +111,15 @@ public class AuthController : ControllerBase
         }
 
         var isEmailAlreadyRegistered = await _userManager.FindByEmailAsync(registerRequest.Email) != null;
-
+        var isUserNameAlreadyRegistered = await _userManager.FindByNameAsync(registerRequest.Username) != null;
         if (isEmailAlreadyRegistered)
         {
             return Conflict($"Email Id {registerRequest.Email} is already registered.");
+        }
+
+        if (isUserNameAlreadyRegistered)
+        {
+            return Conflict($"Username {registerRequest.Username} is already registered");
         }
 
         var newUser = new User
@@ -124,10 +129,16 @@ public class AuthController : ControllerBase
             DisplayName = registerRequest.DisplayName,
         };
 
-        await _userManager.CreateAsync(newUser, registerRequest.Password);
+        var result = await _userManager.CreateAsync(newUser, registerRequest.Password);
 
-        return Ok("User created successfully");
-
+        if (result.Succeeded)
+        {
+            return Ok("User created successfully");
+        }
+        else
+        {
+            return StatusCode(500, result.Errors.Select(e => new { Msg = e.Code, Desc = e.Description }).ToList());
+        }
     }
 
     private string GetRefreshToken()
@@ -138,7 +149,7 @@ public class AuthController : ControllerBase
 
         if (!tokenIsUnique)
             return GetRefreshToken();  //recursive call
-            
+
         return token;
     }
 
@@ -162,8 +173,8 @@ public class AuthController : ControllerBase
 
     private async Task<AuthResponse> GetTokens(User user)
     {
-            //create claims details based on the user information
-            var claims = new[] {
+        //create claims details based on the user information
+        var claims = new[] {
                         new Claim(JwtRegisteredClaimNames.Sub, _configuration["token:subject"]),
                         new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString()),
                         new Claim(JwtRegisteredClaimNames.Iat, DateTime.UtcNow.ToString()),
@@ -172,19 +183,19 @@ public class AuthController : ControllerBase
                         new Claim("Email", user.Email)
                     };
 
-            var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["token:key"]));
-            var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
-            var token = new JwtSecurityToken(
-                _configuration["token:issuer"],
-                _configuration["token:audience"],
-                claims,
-                expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["token:accessTokenExpiryMinutes"])),
-                signingCredentials: signIn);
-            var tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
+        var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_configuration["token:key"]));
+        var signIn = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
+        var token = new JwtSecurityToken(
+            _configuration["token:issuer"],
+            _configuration["token:audience"],
+            claims,
+            expires: DateTime.UtcNow.AddMinutes(Convert.ToDouble(_configuration["token:accessTokenExpiryMinutes"])),
+            signingCredentials: signIn);
+        var tokenStr = new JwtSecurityTokenHandler().WriteToken(token);
 
-            var refreshTokenStr = GetRefreshToken();
-            var authResponse = new AuthResponse { AccessToken = tokenStr, RefreshToken = refreshTokenStr };
-            return await Task.FromResult(authResponse);
+        var refreshTokenStr = GetRefreshToken();
+        var authResponse = new AuthResponse { AccessToken = tokenStr, RefreshToken = refreshTokenStr };
+        return await Task.FromResult(authResponse);
     }
 
     private IActionResult BadRequestErrorMessages()
