@@ -113,10 +113,15 @@ public class AuthController : ControllerBase
         }
 
         var isEmailAlreadyRegistered = await _userManager.FindByEmailAsync(registerRequest.Email) != null;
-
+        var isUserNameAlreadyRegistered = await _userManager.FindByNameAsync(registerRequest.Username) != null;
         if (isEmailAlreadyRegistered)
         {
             return Conflict($"Email Id {registerRequest.Email} is already registered.");
+        }
+
+        if (isUserNameAlreadyRegistered)
+        {
+            return Conflict($"Username {registerRequest.Username} is already registered");
         }
 
         var newUser = new User
@@ -126,10 +131,16 @@ public class AuthController : ControllerBase
             DisplayName = registerRequest.DisplayName,
         };
 
-        await _userManager.CreateAsync(newUser, registerRequest.Password);
+        var result = await _userManager.CreateAsync(newUser, registerRequest.Password);
 
-        return Ok("User created successfully");
-
+        if (result.Succeeded)
+        {
+            return Ok("User created successfully");
+        }
+        else
+        {
+            return StatusCode(500, result.Errors.Select(e => new { Msg = e.Code, Desc = e.Description }).ToList());
+        }
     }
 
     private async Task<AuthResponse> GetTokens(User user)
