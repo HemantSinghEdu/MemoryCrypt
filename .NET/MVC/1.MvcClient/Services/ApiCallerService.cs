@@ -51,7 +51,7 @@ public class ApiCallerService : IApiCallerService
             url: url,
             bodyContent: request);
         LoginResponse loginResponse = new LoginResponse();
-        
+
         //if login was successful
         if (httpResponse.StatusCode == HttpStatusCode.OK)
         {
@@ -69,7 +69,6 @@ public class ApiCallerService : IApiCallerService
         }
         return loginResponse;
     }
-
 
     public async Task<ArticlesResponse> RequestArticlesAsync()
     {
@@ -161,6 +160,37 @@ public class ApiCallerService : IApiCallerService
             }
         }
         return response;
+    }
+
+    public async Task<bool> RequestRevokeAsync()
+    {
+        var url = _config["apiService:tokenRevokeUrl"];
+
+        var email = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == ClaimTypes.Email)?.Value;
+        var token = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "token")?.Value;
+        var refreshToken = _contextAccessor.HttpContext.User.Claims.FirstOrDefault(c => c.Type == "refresh")?.Value;
+
+        if (!(string.IsNullOrEmpty(token) || string.IsNullOrEmpty(refreshToken)))
+        {
+            var revokeRequest = new RevokeRequest
+            {
+                RefreshToken = refreshToken
+            };
+
+            var httpResponse = await MakeHttpCallAsync(
+            httpMethod: HttpMethod.Post,
+            url: url,            
+            bodyContent: revokeRequest,
+            authScheme: "bearer",
+            authToken: token);
+
+            if(httpResponse.StatusCode == HttpStatusCode.OK)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     private async Task<HttpResponseMessage> MakeHttpCallAsync(

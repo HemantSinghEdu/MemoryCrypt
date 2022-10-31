@@ -98,10 +98,13 @@ public class AuthController : Controller
     [HttpGet]
     public async Task<IActionResult> Logout()
     {
-        //log the user out
+        //remove stored tokens from database by calling web api
+        await _apiService.RequestRevokeAsync();
+        
+        //log the user out by removing cookie from mvc app
         await _authService.LogoutAsync();
-
-        //take to home page
+        
+        //redirect to home page once logged out
         return RedirectTo();
     }
 
