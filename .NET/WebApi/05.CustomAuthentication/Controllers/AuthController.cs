@@ -50,6 +50,13 @@ public class AuthController : ControllerBase
 
     }
 
+    [HttpGet("tokenValidate")]
+    [Authorize]
+    public async Task<IActionResult> TokenValidate()
+    {
+        //This endpoint is created so any user can validate their token
+        return Ok("Token is valid");
+    }
 
     [HttpPost("refresh")]
     public async Task<IActionResult> Refresh(RefreshRequest request)

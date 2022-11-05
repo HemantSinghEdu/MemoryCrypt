@@ -6,6 +6,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Add services to the container.
 builder.Services.AddTransient<IApiCallerService, ApiCallerService>();
 builder.Services.AddTransient<IAuthService, AuthService>();
+builder.Services.AddTransient<IArticleService, ArticleService>();
 builder.Services.AddSingleton<HttpClient>();
 
 builder.Services.AddControllersWithViews();
@@ -19,6 +20,11 @@ builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationSc
                     options.Cookie.HttpOnly = true;
                     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
                     options.Cookie.SameSite = SameSiteMode.Strict;
+                    options.Events.OnValidatePrincipal = async context =>
+                    {
+                        var authService = context.HttpContext.RequestServices.GetRequiredService<IAuthService>();
+                        await authService.TakeActionIfTokenExpired(context);
+                    };
                 });
 
 var app = builder.Build();

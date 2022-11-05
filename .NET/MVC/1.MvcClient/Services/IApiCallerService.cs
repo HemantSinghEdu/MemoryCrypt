@@ -4,10 +4,12 @@ namespace MvcClient.Services;
 
 public interface IApiCallerService
 {
-    Task<RegisterResponse> RequestRegisterAsync(RegisterRequest request);
-    Task<LoginResponse> RequestLoginAsync(LoginRequest request);
-    Task<LoginResponse> RequestRefreshAsync();
-    Task<bool> RequestRevokeAsync();    
-    Task<ArticlesResponse> RequestArticlesAsync();
-    
+   Task<HttpResponseMessage> MakeHttpCallAsync(
+        HttpMethod httpMethod,
+        string url,
+        object bodyContent = null,
+        string acceptHeader = "application/json",
+        string authScheme = null,
+        string authToken = null,
+        Dictionary<string, string> extraHeaders = null);
 }

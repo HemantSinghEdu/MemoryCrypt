@@ -9,10 +9,10 @@ namespace MvcClient.Controllers;
 [Authorize]
 public class ArticlesController : Controller
 {
-    private IApiCallerService _apiService;
-    public ArticlesController(IApiCallerService apiService)
+    private IArticleService _articleService;
+    public ArticlesController(IArticleService articleService)
     {
-        _apiService = apiService;
+        _articleService = articleService;
     }
 
     [AllowAnonymous]
@@ -25,7 +25,7 @@ public class ArticlesController : Controller
     [HttpGet]
     public async Task<IActionResult> GetArticles()
     {
-        var articlesResponse = await _apiService.RequestArticlesAsync();
+        var articlesResponse = await _articleService.GetArticlesAsync();
         if (articlesResponse.Status == HttpStatusCode.Unauthorized)
         {
             //if response is 401, it means access token has expired
@@ -47,6 +47,22 @@ public class ArticlesController : Controller
     [HttpPost]
     public async Task<IActionResult> CreateArticle(Article article)
     {
-        throw new NotImplementedException();
+        if (!ModelState.IsValid)
+        {
+            //return error messages
+            return View(article);
+        }
+
+        var response = await _articleService.CreateArticleAsync(article);
+        if (response.Status == HttpStatusCode.Unauthorized)
+        {
+            //if response is 401, it means access token has expired
+            return RedirectToAction("refresh", "auth", new { returnUrl = "/articles/createArticle" });
+        }
+        if (response.Status != HttpStatusCode.OK)
+        {
+            ModelState.AddModelError(string.Empty, "An Error Occurred while processing this request. Please try again in some time.");
+        }
+        return RedirectToAction("index");
     }
 }

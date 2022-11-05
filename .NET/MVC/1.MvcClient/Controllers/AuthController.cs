@@ -7,11 +7,9 @@ namespace MvcClient.Controllers;
 
 public class AuthController : Controller
 {
-    private IApiCallerService _apiService;
     private IAuthService _authService;
-    public AuthController(IApiCallerService apiService, IAuthService authService)
+    public AuthController(IAuthService authService)
     {
-        _apiService = apiService;
         _authService = authService;
     }
 
@@ -32,7 +30,7 @@ public class AuthController : Controller
         else
         {
             //register the user info
-            var response = await _apiService.RequestRegisterAsync(registerRequest);
+            var response = await _authService.RegisterAsync(registerRequest);
 
             if (response.Status != HttpStatusCode.OK)
             {
@@ -62,13 +60,13 @@ public class AuthController : Controller
         }
         else
         {
-            //log the user in
-            var response = await _apiService.RequestLoginAsync(loginRequest);
+            //provide login creds to web api and get tokens in response
+            var response = await _authService.LoginAsync(loginRequest);
 
             if (response.Status == HttpStatusCode.OK)
             {
-                //log the user in by generating a cookie
-                await _authService.LoginAsync(response.Email, response.AccessToken, response.RefreshToken);
+                //log the user in by generating a cookie 
+                await _authService.LoginWithCookieAsync(response.Email, response.AccessToken, response.RefreshToken);
             }
             else
             {
@@ -82,10 +80,10 @@ public class AuthController : Controller
     [HttpGet]
     public async Task<IActionResult> Refresh(string returnUrl)
     {
-        var response = await _apiService.RequestRefreshAsync();
+        var response = await _authService.RefreshTokenAsync();
         if (response.Status == HttpStatusCode.OK)
         {
-             await _authService.LoginAsync(response.Email, response.AccessToken, response.RefreshToken);
+            await _authService.LoginWithCookieAsync(response.Email, response.AccessToken, response.RefreshToken);
             return RedirectTo(returnUrl);
         }
         else
@@ -99,7 +97,7 @@ public class AuthController : Controller
     public async Task<IActionResult> Logout()
     {
         //remove stored tokens from database by calling web api
-        await _apiService.RequestRevokeAsync();
+        await _authService.RevokeTokenAsync();
         
         //log the user out by removing cookie from mvc app
         await _authService.LogoutAsync();
