@@ -14,6 +14,44 @@
 					"bearer": [
 						{
 							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiIzNTVkOTBiOC03NmFmLTQ3ZjQtYWY4Ny0yYTBhMjVkMTQzYjkiLCJpYXQiOiIzMC0xMC0yMDIyIDIwOjQyOjA1IiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY3MTYyNTg1LCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.FWduLodfM003bMNaLqurprL7CatrqgBX50etkIjhKi4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Create a Web API with Custom Authentication and ASP.NET Core Identity\",\r\n    \"author\": \"Albert W\",\r\n    \"content\": \"Hey folks! So, in a previous article, we created a Web API with JWT token authentication and ASP.NET Core Identity. However, in some scenarios, we may not necessarily be open to using JWT tokens. Rather, we may want our own custom tokens. For such scenarios, we need to create our own custom token generator, as well as custom authentication handler. Let us see how to do that!\",\r\n    \"views\": 700,\r\n    \"upvotes\": 10\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/articles",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - POST 3",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
 							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiJjNTY2NzQ4Mi0wOGE5LTRhMjctYTkyYi1hOGYyNWEzNzlhMzUiLCJpYXQiOiIwMi0xMC0yMDIyIDA0OjMxOjExIiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY0Njg1MTMxLCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.HcOYG8W3wenTmRoBik__3itafhjc4ZtdWANZm8Phnv4",
 							"type": "string"
 						}
@@ -24,6 +62,120 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"title\":\"Astronomers reveal first photograph of a black hole at the heart of our galaxy\",\r\n    \"author\": \"John Doe\",\r\n    \"content\": \"This is the first image of Sagittarius A*, the supermassive black hole at the centre of our galaxy. It’s the first direct visual evidence of the presence of this black hole. It was captured by the Event Horizon Telescope (EHT), an array that linked together eight existing radio observatories across the planet to form a single 'Earth-sized' virtual telescope\",\r\n    \"views\": 900,\r\n    \"upvotes\": 70\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/articles",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - POST 2",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiJkZmE5NjljMy02MDllLTRkZmItODFhMC0yZWQxMzQwNGU2YjAiLCJpYXQiOiIwMi0xMS0yMDIyIDAyOjA3OjQ3IiwiVXNlcklkIjoiNTIwYTU3ZjEtNTlkOC00MjEyLTg2OWItOTM5NmQzNGFhZGM5IiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY3MzU0OTI3LCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.rA9PU-pz9-NFkpNN22TbRKilz76e2Lze_fUePkyIbDo",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Where do I store auth tokens on client side?\",\r\n    \"author\": \"William C\",\r\n    \"content\": \"Hey folks! In this article I am going to briefly address the topic of where to store our precious auth tokens on the client side.\",\r\n    \"views\": 10,\r\n    \"upvotes\": 2\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/articles",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - POST 4",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiIwNDgzNTVkZi1kZjEzLTQ1YjEtOTY2NC01NjY4ZTZkZjlkYWYiLCJpYXQiOiIwMi0xMS0yMDIyIDAyOjA2OjI1IiwiVXNlcklkIjoiNTIwYTU3ZjEtNTlkOC00MjEyLTg2OWItOTM5NmQzNGFhZGM5IiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY3MzU0ODQ1LCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.jUcLzUKqxg7rFT1Q4W1G2Na0p1CbKHFPk9Np95G-2E8",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Connecting to MongoDB from .NET\",\r\n    \"author\": \"Henry V\",\r\n    \"content\": \"Below is an example of how to connect to MongoDB in .NET. This is a sample code, so it does not follow the usual design practices - you can see all the code in one place. This is done to keep things simple. \",\r\n    \"views\": 20,\r\n    \"upvotes\": 5\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/articles",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - POST 5",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiJjNTY2NzQ4Mi0wOGE5LTRhMjctYTkyYi1hOGYyNWEzNzlhMzUiLCJpYXQiOiIwMi0xMC0yMDIyIDA0OjMxOjExIiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY0Njg1MTMxLCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.HcOYG8W3wenTmRoBik__3itafhjc4ZtdWANZm8Phnv4",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Create a Web API with Custom Authentication and ASP.NET Core Identity\",\r\n    \"author\": \"Max B\",\r\n    \"content\": \"Hey folks! So, in a previous article, we created a Web API with JWT token authentication and ASP.NET Core Identity. However, in some scenarios, we may not necessarily be open to using JWT tokens. Rather, we may want our own custom tokens. For such scenarios, we need to create our own custom token generator, as well as custom authentication handler. Let us see how to do that!\",\r\n    \"views\": 130,\r\n    \"upvotes\": 25\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -80,7 +232,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n   \"accessToken\": \"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiJhNjNlNjMwYy0wOTM1LTRjOTktYjg3ZC1lYzJlZjYxYjY0NzMiLCJpYXQiOiIwMi0xMC0yMDIyIDA0OjM2OjA5IiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY0Njg1NDI5LCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.9Gw3qSexWKF9Y3I2q7lLQUFVZITgm98GQBnR81hposQ\",\r\n    \"refreshToken\": \"wCqiYIQWRmlgTV7X3W4Qp4lwhy/Z/VcZao2nCtOh52H5hMkLvpgYEA/4mJKmLbKJ/CrFAsTqmunPnw8PaoW1pQ==\"\r\n}",
+					"raw": "{\r\n    \"accessToken\": \"Mbl2P1ObCsilE6iTmfNM+p4UTzXxsUvuWVRKRNc7gUpvLw/ZRU3cjgAMOfg0zQwo413udVFE+aOY0wNcjPz617kS5Ld7yiieYn00YDgTSrBlHWYFNs4gr3tvxvqGMFW/YAbyecl6JQKCnQDqlm2doHUqz/VyNxxp3PpjaVQSNN7xktdcbMO4ano8H4FD5TiU8JQVTfP6sRDbbBvwNxptNxdJ9oUWWb/Wh0l+RszLSX7fs5hn6MaW2ojWI1LTEGFZkv2kFgHiUVUfNKEwU9B28TgRgfE0sYhfSm6q+kPwTsem1xzgOCgTccmf4dtFg8xADzLm+UW24h40+gSd/ZcXrfxY0/lY/gvL5vSha3wi4QtUTQMYkBgHvvUj0uVwzpDYSwqoL2zN23ZOAayR0NPONg==\",\r\n    \"refreshToken\": \"8G6UIrVyVFMa1sjTUur270AxrV3OTZ4sALqbrnE+KMD4ZRpI4mvAZpkzjg7XXUkzvmUcrw6sHSJI2h4DhwNKIg==\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -142,6 +294,48 @@
 			"response": []
 		},
 		{
+			"name": "auth - validateToken",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiIxZjRhZGJjYy01MzkxLTQzMTgtODhkZC0wNTJiOGQxYTRhYWEiLCJpYXQiOiIwNi0xMS0yMDIyIDAzOjM1OjIwIiwiVXNlcklkIjoiNTIwYTU3ZjEtNTlkOC00MjEyLTg2OWItOTM5NmQzNGFhZGM5IiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY3NzA1NzgwLCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.xFPlAV_7VBGThQ0_HKAVxY4bTVRvTZNeu21CHbcUsUA",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/auth/tokenValidate",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"auth",
+						"tokenValidate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "auth - Register new User",
 			"request": {
 				"method": "POST",
@@ -149,6 +343,35 @@
 				"body": {
 					"mode": "raw",
 					"raw": "{\r\n    \"email\":\"xavier@abc.com\",\r\n    \"userName\": \"xavier\",\r\n    \"displayName\": \"Savvy\",\r\n    \"password\": \"pass@123\",\r\n    \"confirmPassword\": \"pass@123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7110/auth/register",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7110",
+					"path": [
+						"auth",
+						"register"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "auth - Register new User 2",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"email\":\"john.wick@abcd.com\",\r\n    \"userName\": \"John\",\r\n    \"displayName\": \"John\",\r\n    \"password\": \"pass@123\",\r\n    \"confirmPassword\": \"pass@123\"\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -181,7 +404,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiJmMmYyMGE2ZS0wMGExLTQ0OWItYmEzYS00NjEyYjE2NzU1YzciLCJpYXQiOiIwMi0xMC0yMDIyIDA0OjI2OjU5IiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY0Njg0ODc5LCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.pKe7tEj59AJ1CalqDSNwMXOOBcwZXZ_eLiCehTPL3zo",
+							"value": "Mbl2P1ObCsilE6iTmfNM+p4UTzXxsUvuWVRKRNc7gUpvLw/ZRU3cjgAMOfg0zQwo71cSPewhCck2EhsgejC50fcGs9W6ritZmehviAtbV0T4G3+2WrUorSPgRWUdOJLBORa+1YCGrAnVETm0/Tk4K3l069B3zsT3mEig3qLPe3opSuqcITvp7uPheWnlolS/IwcSXNXKwbRgSlrIZ+3qTyXI1iOV80fs59fLlsVl8EsEdgNiZ95xudLWWyBZCEESY5kWX5O2FLxvqaGauXBDT9Fvo/ozQiQ0+fP0TP6aw8SEPN/si/Aqy/ab0DCQzSvf23plJJxFxTz3qjBGcSKv5qib4wPDv/M9Ik3NZLHZsYrLI9f2JGwgYJb1UWZWjuzS2E6bupUkU3B6yiox2JEvBbdIlItwIdwjb0/BqRER7Fg=",
 							"type": "string"
 						}
 					]
@@ -263,7 +486,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI1NzRjY2YzMS1jY2JkLTRlN2MtOTIxYS0xYzA5MjZiZGVhMzciLCJpYXQiOiIxNS0wOS0yMDIyIDAyOjU2OjU1IiwiVXNlcklkIjoiYWJjMTIzIiwiRGlzcGxheU5hbWUiOiJCaWxib0JhZ2dpbnMiLCJVc2VyTmFtZSI6IkpvaG4iLCJFbWFpbCI6ImpvaG5AYWJjLmNvbSIsImV4cCI6MTY2MzIxMTIxNSwiaXNzIjoiTWVtb3J5Y3J5cHRBdXRoU2VydmVyIiwiYXVkIjoiUG9zdG1hbkNsaWVudCJ9.TW2kCAYrAHgHSdZniyX_ljLPSNgJ2XH2qc8o6r5t72A",
+							"value": "Mbl2P1ObCsilE6iTmfNM+p4UTzXxsUvuWVRKRNc7gUpvLw/ZRU3cjgAMOfg0zQwovoiyCaZLEHUjPXacU8dkqpkLjKARlLEPoNwBWNybHnW5fb70c2wDNyY1TYI3I1exac3D52Kl+yL2LDMVIO79CFEXoJDgvQf2afZ/BERB5qnioOXkOTx4+6tOmbnw7OJgfdT2kwAoW1wSqgWY2190bgxI6EuqClCQ2vhQRmMg8czLxd30F1fYcrxhi1No0REwe59JT0xF0ZtVo++9+FgINGQqTclwTwpqOUZZ+di/EZtzRqSFjXwrTstH2Or4n6RDCojSodP+4EHTyodgh5iPD+mqoWVleZkB93S6gLXDEern8PL4i4q1hfhlysU0hIunjShX5bSulqLCFKMpmGTMfw==",
 							"type": "string"
 						}
 					]
@@ -302,7 +525,7 @@
 					"bearer": [
 						{
 							"key": "token",
-							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI1NzRjY2YzMS1jY2JkLTRlN2MtOTIxYS0xYzA5MjZiZGVhMzciLCJpYXQiOiIxNS0wOS0yMDIyIDAyOjU2OjU1IiwiVXNlcklkIjoiYWJjMTIzIiwiRGlzcGxheU5hbWUiOiJCaWxib0JhZ2dpbnMiLCJVc2VyTmFtZSI6IkpvaG4iLCJFbWFpbCI6ImpvaG5AYWJjLmNvbSIsImV4cCI6MTY2MzIxMTIxNSwiaXNzIjoiTWVtb3J5Y3J5cHRBdXRoU2VydmVyIiwiYXVkIjoiUG9zdG1hbkNsaWVudCJ9.TW2kCAYrAHgHSdZniyX_ljLPSNgJ2XH2qc8o6r5t72A",
+							"value": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJhdXRoVG9rZW4iLCJqdGkiOiI2MTNiM2Q5OC1jMGMxLTQ3NzYtOGQ0MS02MDAyOTJmNGFjZjciLCJpYXQiOiIzMC0xMC0yMDIyIDIwOjQ0OjI5IiwiVXNlcklkIjoiMGY3N2UwYWMtNmIwOC00NmM3LWIwOGEtZTBmNGI5ZTEzZjhjIiwiVXNlck5hbWUiOiJ4YXZpZXIiLCJFbWFpbCI6InhhdmllckBhYmMuY29tIiwiZXhwIjoxNjY3MTYyNzI5LCJpc3MiOiJNZW1vcnljcnlwdEF1dGhTZXJ2ZXIiLCJhdWQiOiJQb3N0bWFuQ2xpZW50In0.bKpC6bI7CJ40tIUp8ulPCxho5IkIeAVIl-3GR6mH2NM",
 							"type": "string"
 						}
 					]
@@ -311,7 +534,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\r\n    \"id\": \"9520a0e7-3c65-4554-a6e9-2c25b60752b0\",\r\n    \"title\":\"Astronomers reveal first photograph of a black hole at the heart of our galaxy\",\r\n    \"author\": \"John Doe\",\r\n    \"content\": \"This is the first image of Sagittarius A*, the supermassive black hole at the centre of our galaxy. It’s the first direct visual evidence of the presence of this black hole. It was captured by the Event Horizon Telescope (EHT), an array that linked together eight existing radio observatories across the planet to form a single 'Earth-sized' virtual telescope\",\r\n    \"views\": 1200,\r\n    \"upvotes\": 70\r\n}",
+					"raw": "{\r\n    \"id\": \"E7B67237-ED76-4614-9AE6-61D3F68479B2\",\r\n    \"title\":\"Create a Web API with Custom Authentication and ASP.NET Core Identity\",\r\n    \"author\": \"Albert W\",\r\n    \"content\": \"Hey folks!! So, in a previous article, we created a Web API with JWT token authentication and ASP.NET Core Identity. However, in some scenarios, we may not necessarily be open to using JWT tokens. Rather, we may want our own custom tokens. For such scenarios, we need to create our own custom token generator, as well as custom authentication handler. Let us see how to do that!\",\r\n    \"views\": 700,\r\n    \"upvotes\": 10\r\n}",
 					"options": {
 						"raw": {
 							"language": "json"
