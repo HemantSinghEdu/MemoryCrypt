@@ -63,6 +63,6 @@ public class ArticlesController : Controller
         {
             ModelState.AddModelError(string.Empty, "An Error Occurred while processing this request. Please try again in some time.");
         }
-        return RedirectToAction("index");
+        return RedirectToAction("getArticles");
     }
 }

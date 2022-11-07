@@ -65,7 +65,7 @@ public class AuthController : Controller
 
             if (response.Status == HttpStatusCode.OK)
             {
-                //log the user in by generating a cookie 
+                //log the user in - basically instruct the browser to store the auth tokens in a cookie
                 await _authService.LoginWithCookieAsync(response.Email, response.AccessToken, response.RefreshToken);
             }
             else

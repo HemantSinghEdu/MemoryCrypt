@@ -105,6 +105,7 @@ public class AuthService : IAuthService
 
     public async Task TakeActionIfTokenExpired(CookieValidatePrincipalContext context)
     {
+        //get current claims from CookieValidatePrincipalContext
         var currentClaims = GenerateClaimsObject(context.Principal.Claims); //can't fetch from user claims yet as they are not saved
         var shouldRedirectToLogin = false;
 
@@ -114,9 +115,11 @@ public class AuthService : IAuthService
         }
         else
         {
+            //check if auth token is still valid
             var isTokenValid = await ValidateToken(currentClaims.AuthToken);
             if (!isTokenValid) 
             { 
+                //refresh auth token 
                 var refreshResponse = await RefreshTokenAsync(currentClaims);
                 if(refreshResponse.Status != HttpStatusCode.OK)
                 {
@@ -124,6 +127,7 @@ public class AuthService : IAuthService
                 }
                 else
                 {
+                    //update the principal (claims) in context object
                     var newPrincipal = GeneratePrincipal(refreshResponse.Email, refreshResponse.AccessToken, refreshResponse.RefreshToken);
                     context.ReplacePrincipal(newPrincipal);
                     context.ShouldRenew = true;
@@ -133,6 +137,8 @@ public class AuthService : IAuthService
 
         if(shouldRedirectToLogin)
         {
+            //if for any reason tokens could not be refreshed
+            //reject the principal and remove the current cookie  
             context.RejectPrincipal();
             await context.HttpContext.SignOutAsync();
         }
@@ -174,10 +180,13 @@ public class AuthService : IAuthService
                 RefreshToken = currentClaims.RefreshToken
             };
 
+            //make a call to web api to get new tokens
             var httpResponse = await _apiService.MakeHttpCallAsync(
             httpMethod: HttpMethod.Post,
             url: url,
             bodyContent: refreshRequest);
+
+            //if call was successful
             if (httpResponse.StatusCode == HttpStatusCode.OK)
             {
                 response = await httpResponse.Content.ReadFromJsonAsync<LoginResponse>();
@@ -186,6 +195,7 @@ public class AuthService : IAuthService
             }
             else
             {
+                //if call failed
                 response = new LoginResponse
                 {
                     Status = httpResponse.StatusCode,
