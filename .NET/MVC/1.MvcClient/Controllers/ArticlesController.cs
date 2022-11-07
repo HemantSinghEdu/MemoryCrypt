@@ -65,4 +65,62 @@ public class ArticlesController : Controller
         }
         return RedirectToAction("getArticles");
     }
+
+    [HttpGet]
+    public async Task<IActionResult> Edit(string id)
+    {
+        var response = await _articleService.GetArticleAsync(id);
+        if (response.Status == HttpStatusCode.Unauthorized)
+        {
+            //if response is 401, it means access token has expired
+            return RedirectToAction("refresh", "auth", new { returnUrl = "/articles/edit" });
+        }
+        var article = response.Articles.FirstOrDefault();
+        return View(article);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Edit(Article article)
+    {
+        var response = await _articleService.UpdateArticleAsync(article);
+        if (response.Status == HttpStatusCode.Unauthorized)
+        {
+            //if response is 401, it means access token has expired
+            return RedirectToAction("refresh", "auth", new { returnUrl = "/articles/createArticle" });
+        }
+         if (response.Status != HttpStatusCode.OK)
+        {
+            ModelState.AddModelError(string.Empty, "An Error Occurred while processing this request. Please try again in some time.");
+        }
+        return RedirectToAction("getArticles");
+    }
+
+    [HttpGet]
+    public async Task<IActionResult> Delete(string id)
+    {
+        var response = await _articleService.GetArticleAsync(id);
+        if (response.Status == HttpStatusCode.Unauthorized)
+        {
+            //if response is 401, it means access token has expired
+            return RedirectToAction("refresh", "auth", new { returnUrl = "/articles/edit" });
+        }
+        var article = response.Articles.FirstOrDefault();
+        return View(article);
+    }
+
+    [HttpPost]
+    public async Task<IActionResult> Delete(Article article)
+    {
+        var response = await _articleService.DeleteArticleAsync(article);
+        if (response.Status == HttpStatusCode.Unauthorized)
+        {
+            //if response is 401, it means access token has expired
+            return RedirectToAction("refresh", "auth", new { returnUrl = "/articles/delete" });
+        }
+        if (response.Status != HttpStatusCode.OK)
+        {
+            ModelState.AddModelError(string.Empty, "An Error Occurred while processing this request. Please try again in some time.");
+        }
+        return RedirectToAction("getArticles");
+    }
 }

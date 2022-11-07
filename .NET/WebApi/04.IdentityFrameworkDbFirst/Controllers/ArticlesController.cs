@@ -29,7 +29,8 @@ public class ArticlesController : ControllerBase
     [HttpGet("{id}")]
     public ActionResult<Article> GetArticles(string id)
     {
-        var article = _context.Articles.FirstOrDefault(a => a.Id.Equals(id));
+        var guid = new Guid(id);
+        var article = _context.Articles.FirstOrDefault(a => a.Id.Equals(guid));
         if(article==null)
         {
             return NotFound();
@@ -56,7 +57,8 @@ public class ArticlesController : ControllerBase
             return BadRequest();
         }
 
-        var articleToUpdate = _context.Articles.FirstOrDefault(a => a.Id.Equals(id));
+        var guid = new Guid(id);
+        var articleToUpdate = _context.Articles.FirstOrDefault(a => a.Id.Equals(guid));
 
         if(articleToUpdate==null)
         {
@@ -79,7 +81,8 @@ public class ArticlesController : ControllerBase
     [HttpDelete("{id}")]
     public ActionResult DeleteArticle(string id)
     {
-        var articleToDelete = _context.Articles.FirstOrDefault(a => a.Id.Equals(id));
+        var guid = new Guid(id);
+        var articleToDelete = _context.Articles.FirstOrDefault(a => a.Id.Equals(guid));
 
         if(articleToDelete == null)
         {

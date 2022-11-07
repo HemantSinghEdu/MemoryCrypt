@@ -13,6 +13,7 @@
             <th>Author</th>
             <th>Upvotes</th>
             <th>Views</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -33,6 +34,10 @@
                 </td>
                 <td>
                     @article.Views
+                </td>
+                <td>
+                    <a asp-action="edit" asp-route-id=@article.Id>Edit</a>
+                    <a asp-action="delete" asp-route-id=@article.Id>Delete</a>
                 </td>
             </tr>
         }
