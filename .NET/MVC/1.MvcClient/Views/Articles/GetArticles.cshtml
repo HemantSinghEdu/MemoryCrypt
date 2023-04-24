@@ -1,0 +1,45 @@
+﻿@model IEnumerable<MvcClient.Models.Article>
+@{
+    ViewData["Title"] = "Articles";
+}
+
+<div asp-validation-summary="All" class="text-danger"></div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Title</th>
+            <th>Content</th>
+            <th>Author</th>
+            <th>Upvotes</th>
+            <th>Views</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach(var article in Model)
+        {
+            <tr>
+                <td>
+                    @article.Title
+                </td>
+                <td>
+                    @article.Content
+                </td>
+                <td>
+                    @article.Author
+                </td>
+                <td>
+                    @article.UpVotes
+                </td>
+                <td>
+                    @article.Views
+                </td>
+                <td>
+                    <a asp-action="edit" asp-route-id=@article.Id>Edit</a>
+                    <a asp-action="delete" asp-route-id=@article.Id>Delete</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

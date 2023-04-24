@@ -1,0 +1,180 @@
+{
+	"info": {
+		"_postman_id": "d845d844-244c-45b7-847e-40dadd986935",
+		"name": "BasicWebApi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "weatherforecast - default controller",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7242/weatherforecast",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7242",
+					"path": [
+						"weatherforecast"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - POST",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\":\"Astronomers reveal first photograph of a black hole at the heart of our galaxy\",\r\n    \"author\": \"John Doe\",\r\n    \"content\": \"This is the first image of Sagittarius A*, the supermassive black hole at the centre of our galaxy. It’s the first direct visual evidence of the presence of this black hole. It was captured by the Event Horizon Telescope (EHT), an array that linked together eight existing radio observatories across the planet to form a single 'Earth-sized' virtual telescope\",\r\n    \"views\": 900,\r\n    \"upvotes\": 70\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7242/articles",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7242",
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - GET",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7242/articles",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7242",
+					"path": [
+						"articles"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - GET/Id",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7242/articles/9520a0e7-3c65-4554-a6e9-2c25b60752b0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7242",
+					"path": [
+						"articles",
+						"9520a0e7-3c65-4554-a6e9-2c25b60752b0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - Update",
+			"request": {
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"id\": \"9520a0e7-3c65-4554-a6e9-2c25b60752b0\",\r\n    \"title\":\"Astronomers reveal first photograph of a black hole at the heart of our galaxy\",\r\n    \"author\": \"John Doe\",\r\n    \"content\": \"This is the first image of Sagittarius A*, the supermassive black hole at the centre of our galaxy. It’s the first direct visual evidence of the presence of this black hole. It was captured by the Event Horizon Telescope (EHT), an array that linked together eight existing radio observatories across the planet to form a single 'Earth-sized' virtual telescope\",\r\n    \"views\": 1200,\r\n    \"upvotes\": 70\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://localhost:7242/articles/9520a0e7-3c65-4554-a6e9-2c25b60752b0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7242",
+					"path": [
+						"articles",
+						"9520a0e7-3c65-4554-a6e9-2c25b60752b0"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "articles - Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "https://localhost:7242/articles/9520a0e7-3c65-4554-a6e9-2c25b60752b0",
+					"protocol": "https",
+					"host": [
+						"localhost"
+					],
+					"port": "7242",
+					"path": [
+						"articles",
+						"9520a0e7-3c65-4554-a6e9-2c25b60752b0"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
