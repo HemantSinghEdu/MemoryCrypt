@@ -11,12 +11,12 @@ namespace WebApiEntityFramework.Controllers
 
     [ApiController]
     [Route("[controller]")]
-    public class EmployeeController : ControllerBase
+    public class EmployeesController : ControllerBase
     {
         private readonly IEmployeeRepository _employeeRepository;
-        private readonly ILogger<EmployeeController> _logger;
+        private readonly ILogger<EmployeesController> _logger;
 
-        public EmployeeController(ILogger<EmployeeController> logger, IEmployeeRepository employeeRepository)
+        public EmployeesController(ILogger<EmployeesController> logger, IEmployeeRepository employeeRepository)
         {
             _logger = logger;
             _employeeRepository = employeeRepository;

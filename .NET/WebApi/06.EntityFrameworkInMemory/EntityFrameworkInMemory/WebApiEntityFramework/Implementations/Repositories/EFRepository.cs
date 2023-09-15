@@ -54,7 +54,7 @@ namespace WebApiEntityFramework.Implementations.Repositories
 
       
         public async Task UpdateAsync(TEntity entityToUpdate)
-        {
+        {   
             _dbSet.Attach(entityToUpdate);
             _context.Entry(entityToUpdate).State = EntityState.Modified;
             await _context.SaveChangesAsync();
